@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "strict": true,
+    "alwaysStrict": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "target": "ESNext",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
+    "strictNullChecks": true,
+    "strictBindCallApply": true,
+    "noEmit": true,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "examples"
+  ]
+}

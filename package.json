@@ -1,0 +1,100 @@
+{
+  "name": "chart",
+  "version": "0.0.1",
+  "description": "",
+  "license": "MIT",
+  "files": [
+    "package.json",
+    "dist"
+  ],
+  "types": "dist/esnext/index.d.ts",
+  "main": "dist/chart.umd.js",
+  "esnext": "dist/esnext/index.js",
+  "module": "dist/esm/index.js",
+  "sideEffects": false,
+  "scripts": {
+    "prepare": "husky install",
+    "commit": "git-cz",
+    "dev:watch": "microbundle watch -i src/index.ts --external none --compress false -f umd --generateTypes false --sourcemap false --output examples/demo-sdk/chart.umd.js --name Chart",
+    "dev:server": "http-server ./examples/demo-sdk/",
+    "dev": "concurrently yarn:dev:watch yarn:dev:server",
+    "build": "yarn build:cleanup && concurrently yarn:build:cjs yarn:build:esm yarn:build:esnext yarn:build:sdk --kill-others-on-fail",
+    "build:cleanup": "rimraf ./dist/cjs ./dist/esm ./dist/esnext",
+    "build:cjs": "ttsc -p ./tsconfig.build.json --module CommonJS --target ES5 --outDir ./dist/cjs",
+    "build:esm": "ttsc -p ./tsconfig.build.json --module ES6 --target ES5 --outDir ./dist/esm",
+    "build:esnext": "ttsc -p ./tsconfig.build.json --module ESNext --target ESNext --outDir ./dist/esnext",
+    "build:sdk": "rollup --config",
+    "lint": "eslint --fix --ext .ts src",
+    "format": "prettier --write ./src"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write ./src",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "dependencies": {
+    "@babel/runtime-corejs3": "^7.20.1",
+    "js-base64": "^2.6.4",
+    "lodash.uniqby": "^4.7.0",
+    "microbundle": "^0.15.1",
+    "promise-polyfill": "^8.2.3",
+    "query-string": "^7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.6",
+    "@babel/plugin-transform-runtime": "^7.19.6",
+    "@babel/preset-env": "^7.19.4",
+    "@commitlint/cli": "^17.2.0",
+    "@commitlint/config-conventional": "^17.2.0",
+    "@commitlint/cz-commitlint": "^17.2.0",
+    "@rollup/plugin-babel": "^6.0.2",
+    "@rollup/plugin-commonjs": "^23.0.2",
+    "@rollup/plugin-json": "^5.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^9.0.2",
+    "@types/react": "^18.0.17",
+    "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
+    "babel-loader": "^9.0.1",
+    "commitizen": "^4.2.5",
+    "commitlint": "^17.2.0",
+    "concurrently": "^7.5.0",
+    "eslint": "^8.26.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-json": "^3.1.0",
+    "eslint-plugin-n": "^15.3.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "http-server": "^14.1.1",
+    "husky": "^8.0.1",
+    "js-cookie": "^3.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.8.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^3.2.5",
+    "rollup-plugin-bundle-size": "^1.0.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.1",
+    "ttypescript": "^1.5.13",
+    "typescript": "^4.8.4"
+  }
+}
