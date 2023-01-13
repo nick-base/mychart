@@ -1,10 +1,14 @@
-!(function (e, o) {
-  'object' == typeof exports && 'undefined' != typeof module
-    ? (module.exports = o())
-    : 'function' == typeof define && define.amd
-    ? define(o)
-    : ((e = 'undefined' != typeof globalThis ? globalThis : e || self).Chart = o())
+;(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined'
+    ? (module.exports = factory())
+    : typeof define === 'function' && define.amd
+    ? define(factory)
+    : ((global = global || self), (global.Chart = factory()))
 })(this, function () {
   console.info('hello world')
-  return { hello: 'hello' }
+  var index = {
+    hello: 'hello',
+  }
+
+  return index
 })
